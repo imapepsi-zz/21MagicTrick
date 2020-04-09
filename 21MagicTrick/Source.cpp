@@ -87,6 +87,7 @@ void print(deque<int> deck) {
     for (int r = 0; r < totalRows; r++) {
         for (int c = 0; c < totalCols; c++) {
             cout << right << setw(CELL_WIDTH/2) << " " << left << setw(CELL_WIDTH/2) << deck.at(i); // Center each item
+            this_thread::sleep_for(chrono::milliseconds(50));
             i++;
         }
         cout << endl;
@@ -130,13 +131,21 @@ int main() {
     deque<int> cards = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 };
     int userCard;
 
-    // shuffle(nums);
-
     cout << "Welcome to the 21 Magic Trick Program!" << endl << endl;
 
+    shuffle(cards);
     print(cards);
 
-    cout << "Pick a number!" << endl << endl;
+    char ready;
+    cout << "Pick a number!" << endl;
+    cout << "Enter 'r' when you have your number: ";
+    cin >> ready;
+    while (ready != 'r') {
+        cout << "Enter 'r' when you have your number: ";
+        cin >> ready;
+    }
+
+    cout << "I'm going to guess your number by asking you only what column its in 3 times." << endl << endl;
 
     for (int i = 0; i < 3; i++) {
         findCard(cards);
@@ -145,19 +154,20 @@ int main() {
 
     userCard = cards.at(10);
 
-    cout << "Now I'm going to collect the cards and create a 4x5 grid and discard the last card (" << cards.back() << ")" << endl << endl;;
+    this_thread::sleep_for(chrono::milliseconds(100));
 
-    cout << right << setw(CELL_WIDTH) << "Column A" << setw(CELL_WIDTH) << "Column B" << setw(CELL_WIDTH) << "Column C" << setw(CELL_WIDTH) << "Column D" << endl;
-    unsigned int i = 0;
-    for (int r = 0; r < 5; r++) {
-        for (int c = 0; c < 4; c++) {
-            cout << right << setw(CELL_WIDTH/2) << " " << left << setw(CELL_WIDTH/2) << cards.at(i); // Center each item
-            i++;
-        }
-        cout << endl;
+
+    cout << "Hmm";
+
+    for (int i = 0; i < 10; i++) {
+        this_thread::sleep_for(chrono::milliseconds(500));
+        cout << ".";
     }
+    cout << endl;
+    
+    cout << "Your Number is " << userCard << "!" << endl;
 
-    this_thread::sleep_for(chrono::seconds(1));
+    this_thread::sleep_for(chrono::milliseconds(100));
 
-    cout << "Hmm" << endl;
+    return 0;
 }
