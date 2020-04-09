@@ -121,53 +121,70 @@ void findCard(deque<int>& deck) {
 
     cout << "Enter the column of the number (a, b, c): ";
     cin >> col;
+    while (col != 'a' && col != 'b' && col != 'c') {
+        cout << "Please enter a valid column." << endl;
+        cout << "Enter the column of the number (a, b, c): ";
+        cin >> col;
+    }
 
     collectCols(deck, col);
     
 }
 
 int main() {
-	// deque of numbers
-    deque<int> cards = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 };
-    int userCard;
+    char again;
 
-    cout << "Welcome to the 21 Magic Trick Program!" << endl << endl;
+    do {
+        // deque of numbers
+        deque<int> cards = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 };
+        int userCard;
 
-    shuffle(cards);
-    print(cards);
+        cout << "Welcome to the 21 Magic Trick Program!" << endl << endl;
 
-    char ready;
-    cout << "Pick a number!" << endl;
-    cout << "Enter 'r' when you have your number: ";
-    cin >> ready;
-    while (ready != 'r') {
+        print(cards);
+
+        char ready;
+        cout << "Pick a number!" << endl;
         cout << "Enter 'r' when you have your number: ";
         cin >> ready;
-    }
+        while (ready != 'r') {
+            cout << "Enter 'r' when you have your number: ";
+            cin >> ready;
+        }
 
-    cout << "I'm going to guess your number by asking you only what column its in 3 times." << endl << endl;
+        cout << "I'm going to guess your number by asking you only what column it's in 3 times." << endl << endl;
 
-    for (int i = 0; i < 3; i++) {
-        findCard(cards);
-        cout << endl;
-    }
+        shuffle(cards);
 
-    userCard = cards.at(10);
+        for (int i = 0; i < 3; i++) {
+            findCard(cards);
+            cout << endl;
+        }
 
-    this_thread::sleep_for(chrono::milliseconds(100));
+        userCard = cards.at(10);
+
+        this_thread::sleep_for(chrono::milliseconds(100));
 
 
-    cout << "Hmm";
+        cout << "Hmm";
 
-    for (int i = 0; i < 10; i++) {
-        this_thread::sleep_for(chrono::milliseconds(500));
-        cout << ".";
-    }
-    cout << endl;
-    
-    cout << "Your Number is " << userCard << "!" << endl;
+        for (int i = 0; i < 5; i++) {
+            this_thread::sleep_for(chrono::milliseconds(500));
+            cout << ".";
+        }
+        cout << endl << endl;
 
-    this_thread::sleep_for(chrono::milliseconds(100));
+        cout << "Your Number is " << userCard << "!" << endl << endl;
+
+        this_thread::sleep_for(chrono::milliseconds(100));
+
+        cout << "Would you like to go again? (y or n): ";
+        cin >> again;
+
+    } while (again == 'y');
+	
+    cout << endl << "Thank you for participating!" << endl;
+
 
     return 0;
 }
