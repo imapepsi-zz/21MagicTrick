@@ -174,7 +174,7 @@ int main() {
         }
         cout << endl << endl;
 
-        cout << "Your Number is " << userCard << "!" << endl << endl;
+        cout << "Your number is " << userCard << "!" << endl << endl;
 
         this_thread::sleep_for(chrono::milliseconds(100));
 
